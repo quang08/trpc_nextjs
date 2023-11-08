@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import { trpc } from "../_trpc/client"
+import { serverClient } from "../_trpc/serverClient";
 
-function TodoList() {
-  const getTodos = trpc.getTodos.useQuery();
+function TodoList({
+  initialTodos
+  } : {
+    initialTodos: Awaited<ReturnType<(typeof serverClient)["getTodos"]>> //return type of the getTodos function. Awaited is to unwrap the type from Promise
+  }) {
+  const getTodos = trpc.getTodos.useQuery(undefined, {
+    initialData: initialTodos, //prepopulate the query and skip the initial loading state.
+    refetchOnMount: false, //prevent the client from making a getTodos call again after mounted
+    refetchOnReconnect: false
+  });
   const addTodo = trpc.addTodo.useMutation({
     onSettled: () => {
       getTodos.refetch() //when addTodo is setteled, we refetch getTodos
