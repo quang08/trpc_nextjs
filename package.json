@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-     "generate": "drizzle-kit generate:sqlite --out drizzle --schema src/app/db/schema.ts"
+    "generate": "drizzle-kit generate:sqlite --out drizzle --schema src/app/db/schema.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.36.1",
@@ -18,7 +18,8 @@
     "drizzle-orm": "^0.28.6",
     "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.7",
